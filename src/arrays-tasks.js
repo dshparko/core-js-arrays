@@ -455,8 +455,10 @@ function getIndicesOfOddNumbers(numbers) {
  *    getHexRGBValues([ 0, 255, 16777215]) => [ '#000000', '#0000FF', '#FFFFFF' ]
  *    getHexRGBValues([]) => []
  */
-function getHexRGBValues(/* arr */) {
-  throw new Error('Not implemented');
+function getHexRGBValues(arr) {
+  return arr.map((element) => {
+    return `#${element.toString(16).toUpperCase().padStart(6, '0')}`;
+  });
 }
 
 /**
@@ -504,8 +506,21 @@ function findCommonElements(arr1, arr2) {
  *    findLongestIncreasingSubsequence([3, 10, 2, 1, 20]) => 2
  *    findLongestIncreasingSubsequence([50, 3, 10, 7, 40, 80]) => 3
  */
-function findLongestIncreasingSubsequence(/* nums */) {
-  throw new Error('Not implemented');
+function findLongestIncreasingSubsequence(nums) {
+  let result = 0;
+  let count = 0;
+  nums.reduce((acc, value, index) => {
+    if (nums[index] < nums[index + 1]) {
+      count += 1;
+    } else {
+      if (count > result) {
+        result = count;
+      }
+      count = 0;
+    }
+    return count;
+  }, 0);
+  return result + 1;
 }
 
 /**
@@ -595,8 +610,15 @@ function sortDigitNamesByNumericOrder(arr) {
  *   swapHeadAndTail([]) => []
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  const middle = Math.floor(arr.length / 2);
+  if (arr.length % 2 === 0) {
+    const head = arr.splice(0, middle);
+    return arr.concat(head);
+  }
+  const head = arr.splice(0, middle);
+  const tail = arr.splice(1);
+  return tail.concat(arr).concat(head);
 }
 
 module.exports = {
